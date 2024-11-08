@@ -1,0 +1,49 @@
+# Python specific ignores
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Virtual environment
+.venv/
+env/
+ENV/
+venv/
+.venv/
+bin/
+Include/
+Lib/
+Scripts/
+
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE specific ignores (for example, VSCode, PyCharm)
+.vscode/
+.idea/
+*.swp
+
+# Logs and debug files
+*.log
+
+# Images or media files (optional, depending on your needs)
+*.jpg
+*.jpeg
+*.png
+*.bmp
+
+# Ignore large binary files
+*.dll
+*.lib
+
