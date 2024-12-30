@@ -17,6 +17,7 @@ from components.saveImage import *
 
 
 stream_images_cam1 = "E:\\flir\\images\\thermal_image_1.jpg"
+# stream_images_cam1 = 'E:\\flir\\TorpedoDetectionApp_Hitech\\testing_images\\cam1.jpg'
 images_cam1 = "E:\\flir\\TorpedoDetectionApp_Hitech\\images_cam1"
 temp_cam1 = "E:\\flir\\TorpedoDetectionApp_Hitech\\temp_cam1"
 
@@ -34,15 +35,15 @@ def cam1():
     temp_image_cam1 = findLatestImagePath(temp_cam1)
     torpedoInframe = clsTorpedo(cls_model_path_cam1, temp_image_cam1)
     
-    if torpedoInframe:
-        x1, y1, x2, y2 = detectTorpedo(detect_model_path_cam1, temp_cam1)
-         
-        if x1 == None:
-            print("Detect Torpedo Returned None")
-            return -99, -99, -99, -99
-        else:
-            saveImage(temp_image_cam1, images_cam1, final_filename)
-            saveImage(temp_image_cam1, images, final_filename)
-            c_x, c_y, w, h = calculateBBoxInfo(x1, y1, x2, y2)
-            return c_x, c_y, w, h
+    if not torpedoInframe:
+        return -99, -99, -99, -99
     
+    result = detectTorpedo(detect_model_path_cam1, temp_image_cam1)
+    if result is None or result == (-99, -99, -99, -99):
+        return -99, -99, -99, -99
+    
+    x1, y1, x2, y2 = result
+    saveImage(temp_image_cam1, images_cam1, final_filename)
+    saveImage(temp_image_cam1, images, final_filename)
+    c_x, c_y, w, h = calculateBBoxInfo(x1, y1, x2, y2)
+    return c_x, c_y, w, h
